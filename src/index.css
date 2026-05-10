@@ -1,0 +1,287 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Syne:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg: #0c0c0c;
+  --bg-elevated: #141414;
+  --bg-surface: #1a1a1a;
+  --border: #222;
+  --border-hover: #333;
+
+  --text-primary: #f0f0f0;
+  --text-secondary: #999;
+  --text-dim: #555;
+
+  --accent: #e0e0e0;
+  --outline-stroke: var(--text-primary);
+  --navbar-bg: rgba(12, 12, 12, 0.85);
+  --scrollbar-thumb: #333;
+  --scrollbar-track: #0c0c0c;
+  --selection-bg: #fff;
+  --selection-color: #000;
+
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ── Light Theme — Cream ── */
+[data-theme="light"] {
+  --bg: #f5f0e8;
+  --bg-elevated: #ede7dc;
+  --bg-surface: #e5ded3;
+  --border: #d4cdc2;
+  --border-hover: #bfb8ad;
+
+  --text-primary: #1a1612;
+  --text-secondary: #5c5347;
+  --text-dim: #908578;
+
+  --accent: #2a241e;
+  --outline-stroke: #1a1612;
+  --navbar-bg: rgba(245, 240, 232, 0.9);
+  --scrollbar-thumb: #c4bdb2;
+  --scrollbar-track: #f5f0e8;
+  --selection-bg: #1a1612;
+  --selection-color: #f5f0e8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+/* ─────────────────────── */
+/*  BACKGROUND — GRAIN     */
+/* ─────────────────────── */
+.bg-texture {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Subtle horizontal scan-line effect */
+.bg-texture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 255, 255, 0.008) 2px,
+      rgba(255, 255, 255, 0.008) 4px);
+}
+
+/* ─────────────────────── */
+/*  LAYOUT                 */
+/* ─────────────────────── */
+.app-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 4rem);
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+/* Section divider lines */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ─────────────────────── */
+/*  TYPOGRAPHY             */
+/* ─────────────────────── */
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+a:hover {
+  opacity: 0.7;
+  text-shadow: none;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-color);
+}
+
+/* ─────────────────────── */
+/*  ANIMATIONS             */
+/* ─────────────────────── */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes expandLine {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.anim-slide-up {
+  animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-fade {
+  animation: fadeIn 1s ease both;
+}
+
+/* Stagger */
+.d1 {
+  animation-delay: 0.1s;
+}
+
+.d2 {
+  animation-delay: 0.25s;
+}
+
+.d3 {
+  animation-delay: 0.4s;
+}
+
+.d4 {
+  animation-delay: 0.55s;
+}
+
+.d5 {
+  animation-delay: 0.7s;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Only apply hidden state if JS IntersectionObserver is active */
+.reveal.js-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.reveal.js-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─────────────────────── */
+/*  BUTTONS                */
+/* ─────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: 1px solid var(--border-hover);
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: var(--text-primary);
+  color: var(--bg);
+  border-color: var(--text-primary);
+  opacity: 1;
+}
+
+.btn-filled {
+  background: var(--text-primary);
+  color: var(--bg);
+  border-color: var(--text-primary);
+}
+
+.btn-filled:hover {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+/* ─────────────────────── */
+/*  RESPONSIVE             */
+/* ─────────────────────── */
+@media (max-width: 768px) {
+  section {
+    min-height: auto;
+    padding: 80px 0;
+  }
+}
